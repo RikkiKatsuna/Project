@@ -1,4 +1,6 @@
 public enum PlayerStance{
     Stand,
-    Climb
+    Climb,
+    Crouch,
+    Glide
 }
