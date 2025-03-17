@@ -1,5 +1,4 @@
 using System.Collections;
-using Unity.VisualScripting.Dependencies.Sqlite;
 using UnityEditor.Rendering;
 using UnityEngine;
 using UnityEngine.Rendering;
@@ -76,6 +75,8 @@ public class PlayerMovement : MonoBehaviour
     private float _minGlideRotationX;
     [SerializeField]
     private float _maxGlideRotationX;
+    [SerializeField]
+    private PlayerAudioManager _playerAudioManager;
 
     //Attack
     private bool _isPunching;
@@ -315,6 +316,7 @@ public class PlayerMovement : MonoBehaviour
         if (_playerStance != PlayerStance.Glide && !_isGrounded){
             _playerStance = PlayerStance.Glide;
             _animator.SetBool("Glide", true);
+            _playerAudioManager.PlayGlideSfx();
         }
     }
 
@@ -322,6 +324,7 @@ public class PlayerMovement : MonoBehaviour
         if (_playerStance == PlayerStance.Glide){
             _playerStance = PlayerStance.Stand;
             _animator.SetBool("Glide", false);
+            _playerAudioManager.StopGlideSfx();
         }
     }
 
