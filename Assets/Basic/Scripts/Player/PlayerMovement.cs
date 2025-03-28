@@ -102,7 +102,20 @@ public class PlayerMovement : MonoBehaviour
     private PlayerStance _playerStance;
     private Animator _animator;
 
+    //ResetCheck
+    [SerializeField]
+    private Transform _resetCheckpointPosition;
+
     //Void Methods
+
+    public void ResetPositionToCheckpoint()
+    {
+        if (_resetCheckpointPosition != null)
+        {
+            transform.position = _resetCheckpointPosition.position;
+            transform.rotation = _resetCheckpointPosition.rotation;
+        }
+    }
     private void Awake()
     {
         _rigidbody = GetComponent<Rigidbody>();
@@ -188,8 +201,8 @@ public class PlayerMovement : MonoBehaviour
             
         }
         else if (isPlayerClimbing){
-           Vector3 horizontal = axisDirection.x * transform.right;
-           Vector3 vertical = axisDirection.y * transform.up;
+           Vector3 horizontal = Vector3.zero;
+           Vector3 vertical = Vector3.zero;
 
            Vector3 checkerLeftPosition = transform.position + (transform.up * 1) + (-transform.right * .75f);
            Vector3 checkerRightPosition = transform.position + (transform.up * 1) + (transform.right * 1f);
